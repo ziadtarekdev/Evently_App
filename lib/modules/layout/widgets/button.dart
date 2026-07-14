@@ -1,0 +1,38 @@
+import 'package:event_app/core/config/routes/app_route.dart';
+import 'package:event_app/core/config/routes/app_routes_name.dart';
+import 'package:event_app/main.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bounce/flutter_bounce.dart';
+
+import '../../../core/config/theme/app_colors.dart';
+
+class Button extends StatelessWidget {
+  void Function() onPressed;
+  String text;
+  TextStyle style;
+  Button({
+    super.key,
+    required this.text,
+    required this.onPressed(),
+    required this.style,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    return Bounce(
+      duration: Duration(milliseconds: 110),
+      onPressed: () {
+        onPressed();
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          color: LightThemeColors.mainColor,
+        ),
+        child: Center(child: Text(text, style: style)),
+      ),
+    );
+  }
+}
