@@ -29,7 +29,7 @@ class Button extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          color: LightThemeColors.mainColor,
+          color: theme.primaryColor,
         ),
         child: Center(child: Text(text, style: style)),
       ),

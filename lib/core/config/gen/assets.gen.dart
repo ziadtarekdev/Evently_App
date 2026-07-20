@@ -17,6 +17,9 @@ import 'package:vector_graphics/vector_graphics.dart' as _vg;
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/arrow-left.svg
+  SvgGenImage get arrowLeft => const SvgGenImage('assets/icons/arrow-left.svg');
+
   /// File path: assets/icons/darkthememoon.svg
   SvgGenImage get darkthememoon =>
       const SvgGenImage('assets/icons/darkthememoon.svg');
@@ -25,14 +28,44 @@ class $AssetsIconsGen {
   SvgGenImage get darkthemesun =>
       const SvgGenImage('assets/icons/darkthemesun.svg');
 
+  /// File path: assets/icons/email.svg
+  SvgGenImage get email => const SvgGenImage('assets/icons/email.svg');
+
+  /// File path: assets/icons/eyeslash.svg
+  SvgGenImage get eyeslash => const SvgGenImage('assets/icons/eyeslash.svg');
+
+  /// File path: assets/icons/google.png
+  AssetGenImage get googlePng => const AssetGenImage('assets/icons/google.png');
+
+  /// File path: assets/icons/google.svg
+  SvgGenImage get googleSvg => const SvgGenImage('assets/icons/google.svg');
+
+  /// File path: assets/icons/lock.svg
+  SvgGenImage get lock => const SvgGenImage('assets/icons/lock.svg');
+
   /// File path: assets/icons/moon.svg
   SvgGenImage get moon => const SvgGenImage('assets/icons/moon.svg');
 
   /// File path: assets/icons/sun.svg
   SvgGenImage get sun => const SvgGenImage('assets/icons/sun.svg');
 
+  /// File path: assets/icons/user.svg
+  SvgGenImage get user => const SvgGenImage('assets/icons/user.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values => [darkthememoon, darkthemesun, moon, sun];
+  List<dynamic> get values => [
+    arrowLeft,
+    darkthememoon,
+    darkthemesun,
+    email,
+    eyeslash,
+    googlePng,
+    googleSvg,
+    lock,
+    moon,
+    sun,
+    user,
+  ];
 }
 
 class $AssetsImagesGen {
@@ -41,6 +74,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/Eventlylogo.png
   AssetGenImage get eventlylogo =>
       const AssetGenImage('assets/images/Eventlylogo.png');
+
+  /// File path: assets/images/forgetpassscreen.png
+  AssetGenImage get forgetpassscreen =>
+      const AssetGenImage('assets/images/forgetpassscreen.png');
 
   /// File path: assets/images/imgfirstonboarding.png
   AssetGenImage get imgfirstonboarding =>
@@ -61,6 +98,7 @@ class $AssetsImagesGen {
   /// List of all assets
   List<AssetGenImage> get values => [
     eventlylogo,
+    forgetpassscreen,
     imgfirstonboarding,
     layoutimg,
     secondonboardingscreen,

@@ -12,6 +12,11 @@ abstract class AppTheme {
           foregroundColor: LightThemeColors.mainText,
         ),
       textTheme:TextTheme(
+        headlineSmall:TextStyle(
+          fontWeight: FontWeight.w600,
+          fontFamily: "Poppins",
+
+        ),//24.0 px
         titleLarge: TextStyle(
           fontWeight: FontWeight.w600,
           fontFamily: "Poppins",
@@ -30,7 +35,8 @@ abstract class AppTheme {
             fontWeight: FontWeight.w600
           ),// 14
 
-  )
+  ),
+
   );
   static ThemeData getDarkTheme()=>ThemeData(
       brightness: Brightness.dark,
