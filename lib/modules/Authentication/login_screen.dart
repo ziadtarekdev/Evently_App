@@ -1,7 +1,9 @@
+import 'package:event_app/core/config/routes/app_route.dart';
 import 'package:event_app/core/config/routes/app_routes_name.dart';
 import 'package:event_app/core/config/theme/app_colors.dart';
 import 'package:event_app/main.dart';
 import 'package:event_app/modules/Authentication/widgets/textfield.dart';
+import 'package:event_app/modules/Home/homescreen/home_screen_view.dart';
 import 'package:event_app/modules/layout/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
@@ -81,7 +83,14 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: 58),
             Button(
               text: "Login",
-              onPressed: () {},
+              onPressed: () {
+                navigatorKey.currentState!.pushAndRemoveUntil(
+                  MaterialPageRoute(
+                    builder: (context) => HomeScreenView(),
+                  ),
+                  (route) => false,
+                );
+              },
               style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 20,

@@ -11,7 +11,7 @@ class TextFieldButton extends StatelessWidget {
 
   final Widget suficon ;
   final bool isPassword;
-  const TextFieldButton({super.key, required this.text, required this.icon,this.suficon=const SizedBox(),this.isPassword=false});
+  const TextFieldButton({super.key, required this.text,  this.icon=const SizedBox(),this.suficon=const SizedBox(),this.isPassword=false});
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +27,9 @@ class TextFieldButton extends StatelessWidget {
           prefixIcon: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: icon,
+          ),
+          suffixIconConstraints: const BoxConstraints(    minWidth: 24,
+              minHeight: 24
           ),
           prefixIconConstraints: const BoxConstraints(
               minWidth: 24,

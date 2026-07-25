@@ -20,6 +20,20 @@ class $AssetsIconsGen {
   /// File path: assets/icons/arrow-left.svg
   SvgGenImage get arrowLeft => const SvgGenImage('assets/icons/arrow-left.svg');
 
+  /// File path: assets/icons/arrowright.svg
+  SvgGenImage get arrowright =>
+      const SvgGenImage('assets/icons/arrowright.svg');
+
+  /// File path: assets/icons/bike.svg
+  SvgGenImage get bike => const SvgGenImage('assets/icons/bike.svg');
+
+  /// File path: assets/icons/birthday-cake.svg
+  SvgGenImage get birthdayCake =>
+      const SvgGenImage('assets/icons/birthday-cake.svg');
+
+  /// File path: assets/icons/book.svg
+  SvgGenImage get book => const SvgGenImage('assets/icons/book.svg');
+
   /// File path: assets/icons/darkthememoon.svg
   SvgGenImage get darkthememoon =>
       const SvgGenImage('assets/icons/darkthememoon.svg');
@@ -28,11 +42,25 @@ class $AssetsIconsGen {
   SvgGenImage get darkthemesun =>
       const SvgGenImage('assets/icons/darkthemesun.svg');
 
+  /// File path: assets/icons/elements.svg
+  SvgGenImage get elements => const SvgGenImage('assets/icons/elements.svg');
+
   /// File path: assets/icons/email.svg
   SvgGenImage get email => const SvgGenImage('assets/icons/email.svg');
 
+  /// File path: assets/icons/exhibition-gallery-icon.svg
+  SvgGenImage get exhibitionGalleryIcon =>
+      const SvgGenImage('assets/icons/exhibition-gallery-icon.svg');
+
+  /// File path: assets/icons/exhibition-stand-icon.svg
+  SvgGenImage get exhibitionStandIcon =>
+      const SvgGenImage('assets/icons/exhibition-stand-icon.svg');
+
   /// File path: assets/icons/eyeslash.svg
   SvgGenImage get eyeslash => const SvgGenImage('assets/icons/eyeslash.svg');
+
+  /// File path: assets/icons/favorite.svg
+  SvgGenImage get favorite => const SvgGenImage('assets/icons/favorite.svg');
 
   /// File path: assets/icons/google.png
   AssetGenImage get googlePng => const AssetGenImage('assets/icons/google.png');
@@ -43,11 +71,49 @@ class $AssetsIconsGen {
   /// File path: assets/icons/lock.svg
   SvgGenImage get lock => const SvgGenImage('assets/icons/lock.svg');
 
+  /// File path: assets/icons/logout.svg
+  SvgGenImage get logout => const SvgGenImage('assets/icons/logout.svg');
+
   /// File path: assets/icons/moon.svg
   SvgGenImage get moon => const SvgGenImage('assets/icons/moon.svg');
 
+  /// File path: assets/icons/moonhomepage.svg
+  SvgGenImage get moonhomepage =>
+      const SvgGenImage('assets/icons/moonhomepage.svg');
+
+  /// File path: assets/icons/search.svg
+  SvgGenImage get search => const SvgGenImage('assets/icons/search.svg');
+
+  /// File path: assets/icons/selectedfavoriteicon.svg
+  SvgGenImage get selectedfavoriteicon =>
+      const SvgGenImage('assets/icons/selectedfavoriteicon.svg');
+
+  /// File path: assets/icons/selectedhomeicon.svg
+  SvgGenImage get selectedhomeicon =>
+      const SvgGenImage('assets/icons/selectedhomeicon.svg');
+
+  /// File path: assets/icons/selectedprofileicon.svg
+  SvgGenImage get selectedprofileicon =>
+      const SvgGenImage('assets/icons/selectedprofileicon.svg');
+
   /// File path: assets/icons/sun.svg
   SvgGenImage get sun => const SvgGenImage('assets/icons/sun.svg');
+
+  /// File path: assets/icons/sunmainpage.svg
+  SvgGenImage get sunmainpage =>
+      const SvgGenImage('assets/icons/sunmainpage.svg');
+
+  /// File path: assets/icons/unselectedfavoriteicon.svg
+  SvgGenImage get unselectedfavoriteicon =>
+      const SvgGenImage('assets/icons/unselectedfavoriteicon.svg');
+
+  /// File path: assets/icons/unselectedhomeicon.svg
+  SvgGenImage get unselectedhomeicon =>
+      const SvgGenImage('assets/icons/unselectedhomeicon.svg');
+
+  /// File path: assets/icons/unselectedprofileicon.svg
+  SvgGenImage get unselectedprofileicon =>
+      const SvgGenImage('assets/icons/unselectedprofileicon.svg');
 
   /// File path: assets/icons/user.svg
   SvgGenImage get user => const SvgGenImage('assets/icons/user.svg');
@@ -55,15 +121,33 @@ class $AssetsIconsGen {
   /// List of all assets
   List<dynamic> get values => [
     arrowLeft,
+    arrowright,
+    bike,
+    birthdayCake,
+    book,
     darkthememoon,
     darkthemesun,
+    elements,
     email,
+    exhibitionGalleryIcon,
+    exhibitionStandIcon,
     eyeslash,
+    favorite,
     googlePng,
     googleSvg,
     lock,
+    logout,
     moon,
+    moonhomepage,
+    search,
+    selectedfavoriteicon,
+    selectedhomeicon,
+    selectedprofileicon,
     sun,
+    sunmainpage,
+    unselectedfavoriteicon,
+    unselectedhomeicon,
+    unselectedprofileicon,
     user,
   ];
 }
@@ -74,6 +158,22 @@ class $AssetsImagesGen {
   /// File path: assets/images/Eventlylogo.png
   AssetGenImage get eventlylogo =>
       const AssetGenImage('assets/images/Eventlylogo.png');
+
+  /// File path: assets/images/birthday.png
+  AssetGenImage get birthday =>
+      const AssetGenImage('assets/images/birthday.png');
+
+  /// File path: assets/images/birthdayimg.png
+  AssetGenImage get birthdayimg =>
+      const AssetGenImage('assets/images/birthdayimg.png');
+
+  /// File path: assets/images/book_club.png
+  AssetGenImage get bookClub =>
+      const AssetGenImage('assets/images/book_club.png');
+
+  /// File path: assets/images/exhibition.png
+  AssetGenImage get exhibition =>
+      const AssetGenImage('assets/images/exhibition.png');
 
   /// File path: assets/images/forgetpassscreen.png
   AssetGenImage get forgetpassscreen =>
@@ -87,9 +187,19 @@ class $AssetsImagesGen {
   AssetGenImage get layoutimg =>
       const AssetGenImage('assets/images/layoutimg.png');
 
+  /// File path: assets/images/meeting.png
+  AssetGenImage get meeting => const AssetGenImage('assets/images/meeting.png');
+
+  /// File path: assets/images/routeimg.png
+  AssetGenImage get routeimg =>
+      const AssetGenImage('assets/images/routeimg.png');
+
   /// File path: assets/images/secondonboardingscreen.png
   AssetGenImage get secondonboardingscreen =>
       const AssetGenImage('assets/images/secondonboardingscreen.png');
+
+  /// File path: assets/images/sport.png
+  AssetGenImage get sport => const AssetGenImage('assets/images/sport.png');
 
   /// File path: assets/images/thirdonboardingscreen.png
   AssetGenImage get thirdonboardingscreen =>
@@ -98,10 +208,17 @@ class $AssetsImagesGen {
   /// List of all assets
   List<AssetGenImage> get values => [
     eventlylogo,
+    birthday,
+    birthdayimg,
+    bookClub,
+    exhibition,
     forgetpassscreen,
     imgfirstonboarding,
     layoutimg,
+    meeting,
+    routeimg,
     secondonboardingscreen,
+    sport,
     thirdonboardingscreen,
   ];
 }
