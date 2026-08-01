@@ -1,32 +1,42 @@
 import 'package:event_app/modules/data/category_data.dart';
-
 import '../../core/config/gen/assets.gen.dart';
 
 class CategoryDataList {
-  static final categories = [
+  static final List<CategoryData> categories = [
     CategoryData(
-      id: "sport",
+      categoryID: "",
+      eventID: "sport",
       name: "Sport",
       img: Assets.images.sport.path,
       icn: Assets.icons.bike.path,
     ),
     CategoryData(
-      id: "birthday",
+      categoryID: "",
+      eventID: "birthday",
       name: "Birthday",
       img: Assets.images.birthday.path,
       icn: Assets.icons.birthdayCake.path,
     ),
     CategoryData(
-      id: "bookclub",
+      categoryID: "",
+      eventID: "bookclub",
       name: "Book Club",
       img: Assets.images.bookClub.path,
       icn: Assets.icons.book.path,
     ),
     CategoryData(
-      id: "exhibition",
+      categoryID: "",
+      eventID: "exhibition",
       name: "Exhibition",
       img: Assets.images.exhibition.path,
-      icn: Assets.icons.exhibitionGalleryIcon.path,
+      icn: Assets.icons.birthdayCake.path,
     ),
   ];
+
+  CategoryData getCategoryDataByID(String id) {
+    return categories.firstWhere(
+          (category) => category.categoryID == id,
+      orElse: () => categories.first,
+    );
+  }
 }

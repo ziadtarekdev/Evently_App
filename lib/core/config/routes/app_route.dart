@@ -6,6 +6,7 @@ import 'package:event_app/core/config/routes/app_routes_name.dart';
 import '../../../modules/Authentication/forget_password_screen.dart';
 import '../../../modules/Authentication/login_screen.dart';
 import '../../../modules/Authentication/register_screen.dart';
+import '../../../modules/Home/Addevent/add_event.dart';
 import '../../../modules/Home/Favourite/favourite_screen_view.dart';
 import '../../../modules/Home/Profile/profile_screen_view.dart';
 import '../../../modules/Onboardingscreens/on_boarding_screen.dart';
@@ -36,6 +37,9 @@ abstract class AppRoute {
                 return MaterialPageRoute(builder: (context) => const FavouriteScreenView());
                 case AppRoutesName.profile:
                   return MaterialPageRoute(builder: (context) => const ProfileScreenView());
+                  case AppRoutesName.addEvent:
+                    return MaterialPageRoute(builder: (context) => const AddEvent());
+
 
     }
     return null;

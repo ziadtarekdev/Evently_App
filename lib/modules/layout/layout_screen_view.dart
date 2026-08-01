@@ -1,11 +1,9 @@
 import 'package:event_app/core/config/routes/app_routes_name.dart';
-import 'package:event_app/core/config/theme/app_colors.dart';
 import 'package:event_app/main.dart';
-import 'package:event_app/modules/layout/widgets/language_selector.dart';
 import 'package:event_app/modules/layout/widgets/button.dart';
+import 'package:event_app/modules/layout/widgets/language_selector.dart';
 import 'package:event_app/modules/layout/widgets/theme_selector.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/config/gen/assets.gen.dart';

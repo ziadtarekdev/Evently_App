@@ -5,7 +5,6 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../core/config/services/settings_config.dart';
 import '../../core/config/theme/app_colors.dart';
 import '../layout/widgets/button.dart';
-import 'on_boarding_screen.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   final void Function() onPressed;

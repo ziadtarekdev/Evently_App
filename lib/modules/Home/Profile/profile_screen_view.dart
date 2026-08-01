@@ -18,7 +18,6 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
   Widget build(BuildContext context) {
     final settingConfig = Provider.of<SettingsConfig>(context);
     ThemeData theme = Theme.of(context);
-    final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SafeArea(
         child: Column(

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/config/gen/assets.gen.dart';
 import '../../../core/config/services/settings_config.dart';
 import '../../../core/config/theme/app_colors.dart';
 
 class TextFieldButton extends StatelessWidget {
   final String text;
   final Widget icon ;
-
+  final int maxlines;
   final Widget suficon ;
   final bool isPassword;
-  const TextFieldButton({super.key, required this.text,  this.icon=const SizedBox(),this.suficon=const SizedBox(),this.isPassword=false});
+  final TextEditingController controller;
+  const TextFieldButton({super.key, required this.text,required this.controller,  this.icon=const SizedBox(),this.suficon=const SizedBox(),this.isPassword=false,this.maxlines=1});
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +21,8 @@ class TextFieldButton extends StatelessWidget {
 
     return
       TextFormField(
+        controller: controller,
+        maxLines: maxlines,
         cursorColor: theme.primaryColor,
         obscureText: isPassword,
         decoration: InputDecoration(

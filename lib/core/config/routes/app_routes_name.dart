@@ -8,5 +8,7 @@ abstract class AppRoutesName {
  static const String home='/home';
  static const String favourite='/favourite';
  static const String profile='/profile';
+ static const String addEvent='/addEvent';
+
 
 }

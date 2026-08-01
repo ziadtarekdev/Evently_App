@@ -1,16 +1,15 @@
-import 'package:event_app/core/config/routes/app_route.dart';
 import 'package:event_app/core/config/routes/app_routes_name.dart';
 import 'package:event_app/core/config/theme/app_colors.dart';
 import 'package:event_app/main.dart';
-import 'package:event_app/modules/Authentication/widgets/textfield.dart';
+import 'package:event_app/modules/Authentication/widgets/text_field_button.dart';
 import 'package:event_app/modules/Home/homescreen/home_screen_view.dart';
-import 'package:event_app/modules/layout/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/config/gen/assets.gen.dart';
 import '../../core/config/services/settings_config.dart';
+import '../layout/widgets/button.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -23,6 +22,8 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isPassword = true;
   @override
   Widget build(BuildContext context) {
+    TextEditingController loginController=TextEditingController();
+    TextEditingController passwordController=TextEditingController();
     ThemeData theme = Theme.of(context);
     final settingsConfig = Provider.of<SettingsConfig>(context);
     return Scaffold(
@@ -46,11 +47,13 @@ class _LoginScreenState extends State<LoginScreen> {
             TextFieldButton(
               icon: Assets.icons.email.svg(),
               text: "Enter your email",
+              controller: loginController,
             ),
             SizedBox(height: 16),
             TextFieldButton(
               icon: Assets.icons.lock.svg(),
               text: "Enter your password",
+              controller: passwordController,
               suficon: GestureDetector(
                 onTap: () {
                   isPassword = !isPassword;

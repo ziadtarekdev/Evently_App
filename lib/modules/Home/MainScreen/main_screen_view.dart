@@ -9,14 +9,18 @@ import '../../../core/config/gen/assets.gen.dart';
 import '../../../core/config/services/settings_config.dart';
 import '../../data/category_data_list.dart';
 
-class MainScreenView extends StatelessWidget {
+class MainScreenView extends StatefulWidget {
   const MainScreenView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final categoryData = CategoryDataList.categories[0];
-    final settingsConfig = Provider.of<SettingsConfig>(context);
+  State<MainScreenView> createState() => _MainScreenViewState();
+}
 
+class _MainScreenViewState extends State<MainScreenView> {
+  int index=0;
+  @override
+  Widget build(BuildContext context) {
+    final settingsConfig = Provider.of<SettingsConfig>(context);
     ThemeData theme = Theme.of(context);
     return Scaffold(
       body: SafeArea(
@@ -57,25 +61,32 @@ class MainScreenView extends StatelessWidget {
             ).paddingSymmetric(horizontal: 16),
             SizedBox(height: 24),
             DefaultTabController(
-              length: CategoryDataList.categories.length ,
+              length: CategoryDataList.categories.length,
               child: TabBar(
+                onTap: (value) {
+                  setState(() {
+                    index = value;
+                  });
+                },
                 labelPadding: EdgeInsets.symmetric(horizontal: 8),
                 dividerHeight: 0,
                 isScrollable: true,
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 tabAlignment: TabAlignment.start,
                 indicator: BoxDecoration(),
-                tabs: CategoryDataList.categories
-                    .map((category) => TabOfScreen(categoryData: category))
-                    .toList(),
+                tabs: List.generate(CategoryDataList.categories.length, (currentIndex) {
+                  final category = CategoryDataList.categories[currentIndex];
+
+                  return TabOfScreen(
+                    categoryData: category,
+                    isSelected: index == currentIndex,
+                  );
+                },
+                ),
               ),
             ),
             SizedBox(height: 24),
-            ListOfEvents(
-              img: Assets.images.birthdayimg.provider(),
-              date: "21 Jun",
-              subtitle: "This is a Birthday Party ",
-            ),
+            ListOfEvents(selectedIndex: index,),
           ],
         ),
       ),

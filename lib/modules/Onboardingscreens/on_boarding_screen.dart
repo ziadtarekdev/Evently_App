@@ -1,11 +1,9 @@
 import 'package:event_app/core/config/routes/app_routes_name.dart';
 import 'package:event_app/core/config/theme/app_colors.dart';
 import 'package:event_app/main.dart';
-import 'package:event_app/modules/layout/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:provider/provider.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../core/config/gen/assets.gen.dart';
 import '../../core/config/services/settings_config.dart';
@@ -19,7 +17,7 @@ class OnBoardingScreens extends StatefulWidget {
 }
 
 class _OnBoardingScreensState extends State<OnBoardingScreens> {
-  PageController _controller = PageController();
+  final PageController _controller = PageController();
   int index = 0;
   @override
   Widget build(BuildContext context) {

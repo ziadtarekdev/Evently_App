@@ -1,10 +1,7 @@
-import 'package:event_app/core/config/routes/app_route.dart';
-import 'package:event_app/core/config/routes/app_routes_name.dart';
-import 'package:event_app/main.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 
-import '../../../core/config/theme/app_colors.dart';
 
 class Button extends StatelessWidget {
   void Function() onPressed;

@@ -1,4 +1,5 @@
-import 'package:event_app/modules/Authentication/widgets/textfield.dart';
+
+import 'package:event_app/modules/Authentication/widgets/text_field_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:provider/provider.dart';
@@ -21,6 +22,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool isPassword = true;
   @override
   Widget build(BuildContext context) {
+
+
+    TextEditingController nameController=TextEditingController();
+    TextEditingController emailController=TextEditingController();
+    TextEditingController passwordController=TextEditingController();
     ThemeData theme = Theme.of(context);
     final settingsConfig = Provider.of<SettingsConfig>(context);
     return Scaffold(
@@ -44,12 +50,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
             TextFieldButton(
               icon: Assets.icons.user.svg(),
               text: "Enter your user name",
+              controller: nameController,
             ),
 
             SizedBox(height: 24),
             TextFieldButton(
               icon: Assets.icons.email.svg(),
               text: "Enter your email",
+              controller: emailController,
             ),
 
             SizedBox(height: 24),
@@ -57,6 +65,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             TextFieldButton(
               icon: Assets.icons.lock.svg(),
               text: "Enter your password",
+              controller: passwordController,
               suficon: GestureDetector(
                 onTap: () {
                   isPassword = !isPassword;
@@ -72,6 +81,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             TextFieldButton(
               icon: Assets.icons.lock.svg(),
               text: "Confirm your password",
+              controller: passwordController,
               suficon: GestureDetector(
                 onTap: () {
                   isPassword = !isPassword;

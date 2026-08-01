@@ -34,6 +34,12 @@ class $AssetsIconsGen {
   /// File path: assets/icons/book.svg
   SvgGenImage get book => const SvgGenImage('assets/icons/book.svg');
 
+  /// File path: assets/icons/calendar.svg
+  SvgGenImage get calendar => const SvgGenImage('assets/icons/calendar.svg');
+
+  /// File path: assets/icons/clock.svg
+  SvgGenImage get clock => const SvgGenImage('assets/icons/clock.svg');
+
   /// File path: assets/icons/darkthememoon.svg
   SvgGenImage get darkthememoon =>
       const SvgGenImage('assets/icons/darkthememoon.svg');
@@ -125,6 +131,8 @@ class $AssetsIconsGen {
     bike,
     birthdayCake,
     book,
+    calendar,
+    clock,
     darkthememoon,
     darkthemesun,
     elements,

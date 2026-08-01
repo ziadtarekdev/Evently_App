@@ -39,6 +39,8 @@ dependencies:
   provider: ^6.1.5+1
   smooth_page_indicator: ^2.0.1
   day_night_themed_switcher: ^2.0.2
+  date_format: ^2.0.9
+  cloud_firestore: ^6.7.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
