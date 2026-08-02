@@ -39,7 +39,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                 settingsConfig.currentTheme == ThemeMode.light
                     ? Assets.icons.sunmainpage.svg()
                     : Assets.icons.moonhomepage.svg(),
-                SizedBox(width: 8),
+
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5.5),
                   decoration: BoxDecoration(
@@ -52,7 +52,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                       color: Colors.white,
                     ),
                   ),
-                ),
+                ).paddingSymmetric(horizontal: 16),
               ],
             ),
             Text(
@@ -76,7 +76,6 @@ class _MainScreenViewState extends State<MainScreenView> {
                 indicator: BoxDecoration(),
                 tabs: List.generate(CategoryDataList.categories.length, (currentIndex) {
                   final category = CategoryDataList.categories[currentIndex];
-
                   return TabOfScreen(
                     categoryData: category,
                     isSelected: index == currentIndex,

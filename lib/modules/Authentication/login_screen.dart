@@ -3,6 +3,8 @@ import 'package:event_app/core/config/theme/app_colors.dart';
 import 'package:event_app/main.dart';
 import 'package:event_app/modules/Authentication/widgets/text_field_button.dart';
 import 'package:event_app/modules/Home/homescreen/home_screen_view.dart';
+import 'package:event_app/modules/Home/widgets/loading_indicator.dart';
+import 'package:event_app/services/fire_base_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:provider/provider.dart';
@@ -19,11 +21,12 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final formKey = GlobalKey<FormState>();
   bool isPassword = true;
   @override
   Widget build(BuildContext context) {
-    TextEditingController loginController=TextEditingController();
-    TextEditingController passwordController=TextEditingController();
+    TextEditingController loginController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
     ThemeData theme = Theme.of(context);
     final settingsConfig = Provider.of<SettingsConfig>(context);
     return Scaffold(
@@ -44,64 +47,110 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             SizedBox(height: 24),
-            TextFieldButton(
-              icon: Assets.icons.email.svg(),
-              text: "Enter your email",
-              controller: loginController,
-            ),
-            SizedBox(height: 16),
-            TextFieldButton(
-              icon: Assets.icons.lock.svg(),
-              text: "Enter your password",
-              controller: passwordController,
-              suficon: GestureDetector(
-                onTap: () {
-                  isPassword = !isPassword;
-                  setState(() {});
-                },
-                child: isPassword
-                    ? Assets.icons.eyeslash.svg(width: 24, height: 24)
-                    : Icon(Icons.remove_red_eye),
-              ),
-              isPassword: isPassword,
-            ),
-            TextButton(
-              onPressed: () {
-                navigatorKey.currentState!.pushNamed(
-                  AppRoutesName.forgetPassword,
-                );
-              },
-              child: Align(
-                alignment: AlignmentGeometry.centerEnd,
-                child: Text(
-                  "Forget Password?",
-                  style: theme.textTheme.titleSmall?.copyWith(
-                    color: theme.primaryColor,
-                    decoration: TextDecoration.underline,
-                    decorationColor: theme.primaryColor,
+            Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  TextFieldButton(
+                    icon: Assets.icons.email.svg(),
+                    text: "Enter your email",
+                    controller: loginController,
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return "Please enter your email";
+                      }
+
+                      final emailRegex = RegExp(r'^[\w\.-]+@[\w\.-]+\.\w+$');
+
+                      if (!emailRegex.hasMatch(value.trim())) {
+                        return "Please enter a valid email";
+                      }
+
+                      return null;
+                    },
                   ),
-                ),
-              ),
-            ),
-            SizedBox(height: 58),
-            Button(
-              text: "Login",
-              onPressed: () {
-                navigatorKey.currentState!.pushAndRemoveUntil(
-                  MaterialPageRoute(
-                    builder: (context) => HomeScreenView(),
+
+                  const SizedBox(height: 16),
+
+                  TextFieldButton(
+                    icon: Assets.icons.lock.svg(),
+                    text: "Enter your password",
+                    controller: passwordController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Please enter your password";
+                      }
+
+                      if (value.length < 6) {
+                        return "Password must be at least 6 characters";
+                      }
+
+                      return null;
+                    },
+                    suficon: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isPassword = !isPassword;
+                        });
+                      },
+                      child: isPassword
+                          ? Assets.icons.eyeslash.svg(width: 24, height: 24)
+                          : const Icon(Icons.remove_red_eye),
+                    ),
+                    isPassword: isPassword,
                   ),
-                  (route) => false,
-                );
-              },
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 20,
-                color: Colors.white,
-                fontFamily: "Poppins",
+
+                  TextButton(
+                    onPressed: () {
+                      navigatorKey.currentState!.pushNamed(
+                        AppRoutesName.forgetPassword,
+                      );
+                    },
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        "Forget Password?",
+                        style: theme.textTheme.titleSmall?.copyWith(
+                          color: theme.primaryColor,
+                          decoration: TextDecoration.underline,
+                          decorationColor: theme.primaryColor,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 58),
+
+                  Button(
+                    text: "Login",
+                    onPressed: () {
+                      if (formKey.currentState!.validate()) {
+                        LoadingOverlay.show(message: "Logging....", context);
+                        FireBaseServices().loginWithEmailAndPassword(
+                          loginController.text.trim(),
+                          passwordController.text.trim(),
+                        );
+                        navigatorKey.currentState!.pushAndRemoveUntil(
+                          MaterialPageRoute(
+                            builder: (context) => const HomeScreenView(),
+                          ),
+                          (route) => false,
+                        );
+                        LoadingOverlay.hide();
+                      }
+                    },
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontFamily: "Poppins",
+                    ),
+                  ),
+
+                  const SizedBox(height: 48),
+                ],
               ),
             ),
-            SizedBox(height: 48),
             Text.rich(
               textAlign: TextAlign.center,
               TextSpan(
@@ -169,7 +218,15 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: 24),
             Bounce(
               duration: Duration(milliseconds: 110),
-              onPressed: () {},
+              onPressed: () async{
+                final result = await FireBaseServices().signInWithGoogle();
+
+                if (result != null) {
+                  navigatorKey.currentState!.pushReplacementNamed(
+                    AppRoutesName.home,
+                  );
+                }
+              },
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 10),
                 decoration: BoxDecoration(

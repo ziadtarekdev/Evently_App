@@ -17,6 +17,12 @@ import 'package:vector_graphics/vector_graphics.dart' as _vg;
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/all.svg
+  SvgGenImage get all => const SvgGenImage('assets/icons/all.svg');
+
+  /// File path: assets/icons/all_blue.svg
+  SvgGenImage get allBlue => const SvgGenImage('assets/icons/all_blue.svg');
+
   /// File path: assets/icons/arrow-left.svg
   SvgGenImage get arrowLeft => const SvgGenImage('assets/icons/arrow-left.svg');
 
@@ -48,6 +54,12 @@ class $AssetsIconsGen {
   SvgGenImage get darkthemesun =>
       const SvgGenImage('assets/icons/darkthemesun.svg');
 
+  /// File path: assets/icons/delete.svg
+  SvgGenImage get delete => const SvgGenImage('assets/icons/delete.svg');
+
+  /// File path: assets/icons/edit.svg
+  SvgGenImage get edit => const SvgGenImage('assets/icons/edit.svg');
+
   /// File path: assets/icons/elements.svg
   SvgGenImage get elements => const SvgGenImage('assets/icons/elements.svg');
 
@@ -67,6 +79,10 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/favorite.svg
   SvgGenImage get favorite => const SvgGenImage('assets/icons/favorite.svg');
+
+  /// File path: assets/icons/filledfavourite.svg
+  SvgGenImage get filledfavourite =>
+      const SvgGenImage('assets/icons/filledfavourite.svg');
 
   /// File path: assets/icons/google.png
   AssetGenImage get googlePng => const AssetGenImage('assets/icons/google.png');
@@ -126,6 +142,8 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<dynamic> get values => [
+    all,
+    allBlue,
     arrowLeft,
     arrowright,
     bike,
@@ -135,12 +153,15 @@ class $AssetsIconsGen {
     clock,
     darkthememoon,
     darkthemesun,
+    delete,
+    edit,
     elements,
     email,
     exhibitionGalleryIcon,
     exhibitionStandIcon,
     eyeslash,
     favorite,
+    filledfavourite,
     googlePng,
     googleSvg,
     lock,
@@ -231,9 +252,7 @@ class $AssetsImagesGen {
   ];
 }
 
-class Assets {
-  const Assets._();
-
+abstract final class Assets {
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
 }

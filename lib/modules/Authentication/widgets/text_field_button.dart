@@ -10,8 +10,9 @@ class TextFieldButton extends StatelessWidget {
   final int maxlines;
   final Widget suficon ;
   final bool isPassword;
+  final FormFieldValidator<String>? validator;
   final TextEditingController controller;
-  const TextFieldButton({super.key, required this.text,required this.controller,  this.icon=const SizedBox(),this.suficon=const SizedBox(),this.isPassword=false,this.maxlines=1});
+  const TextFieldButton({super.key,  this.text="",required this.controller,  this.icon=const SizedBox(),this.suficon=const SizedBox(),this.isPassword=false,this.maxlines=1,this.validator=null});
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,7 @@ class TextFieldButton extends StatelessWidget {
 
     return
       TextFormField(
+        validator: validator,
         controller: controller,
         maxLines: maxlines,
         cursorColor: theme.primaryColor,

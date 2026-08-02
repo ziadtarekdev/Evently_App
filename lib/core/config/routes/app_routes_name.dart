@@ -9,6 +9,7 @@ abstract class AppRoutesName {
  static const String favourite='/favourite';
  static const String profile='/profile';
  static const String addEvent='/addEvent';
-
+ static const String eventDetails='/eventDetails';
+ static const String eventEdit='/eventEdit';
 
 }

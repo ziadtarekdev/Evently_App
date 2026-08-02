@@ -1,5 +1,8 @@
 import 'package:day_night_themed_switcher/day_night_themed_switcher.dart';
+import 'package:event_app/core/config/routes/app_routes_name.dart';
 import 'package:event_app/core/config/theme/app_colors.dart';
+import 'package:event_app/main.dart';
+import 'package:event_app/services/fire_base_services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -133,7 +136,10 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
                   children: [
                     Text("Logout", style: theme.textTheme.titleLarge),
                     Spacer(),
-                    Assets.icons.logout.svg(),
+                   GestureDetector(onTap: () {
+                     FireBaseServices().logout();
+                      navigatorKey.currentState!.pushReplacementNamed(AppRoutesName.login);
+                   },child: Assets.icons.logout.svg(),)
                   ],
                 ),
               ),

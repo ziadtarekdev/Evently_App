@@ -5,6 +5,12 @@ class CategoryDataList {
   static final List<CategoryData> categories = [
     CategoryData(
       categoryID: "",
+      eventID: "all",
+      name: "All",
+      icn: Assets.icons.allBlue.path,
+    ),
+    CategoryData(
+      categoryID: "",
       eventID: "sport",
       name: "Sport",
       img: Assets.images.sport.path,
