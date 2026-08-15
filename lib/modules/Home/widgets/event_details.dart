@@ -27,7 +27,9 @@ class EventDetails extends StatelessWidget {
         title: Text(
           "Event details",
           style: theme.textTheme.bodyLarge?.copyWith(
-            color: LightThemeColors.mainText,
+            color: settingsConfig.currentTheme.isDark
+                ? DarkThemeColors.mainText
+                : LightThemeColors.mainText,
           ),
         ),
         leading: Padding(
@@ -87,7 +89,10 @@ class EventDetails extends StatelessWidget {
                     arguments: category,
                   );
                 },
-                child: Assets.icons.edit.svg(),
+                child: Assets.icons.edit.svg().paddingSymmetric(
+                  horizontal: 4,
+                  vertical: 4,
+                ),
               ),
             ),
           ),
@@ -111,20 +116,22 @@ class EventDetails extends StatelessWidget {
               ),
               child: GestureDetector(
                 onTap: () {
-
                   FireBaseServices().deleteEvent(category.categoryID);
                   Fluttertoast.showToast(
-                      msg: "Deleted Successfully",
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.CENTER,
-                      timeInSecForIosWeb: 1,
-                      backgroundColor: Colors.green,
-                      textColor: Colors.white,
-                      fontSize: 16.0
+                    msg: "Deleted Successfully",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.CENTER,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.green,
+                    textColor: Colors.white,
+                    fontSize: 16.0,
                   );
                   navigatorKey.currentState!.pop();
                 },
-                child: Assets.icons.delete.svg(),
+                child: Assets.icons.delete.svg().paddingSymmetric(
+                  horizontal: 4,
+                  vertical: 4,
+                ),
               ),
             ),
           ).paddingSymmetric(horizontal: 16),
@@ -135,10 +142,20 @@ class EventDetails extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-              border: Border.all(width: 2, color: LightThemeColors.stroke),
+              border: Border.all(
+                width: 2,
+                color: settingsConfig.currentTheme == ThemeMode.light
+                    ? LightThemeColors.stroke
+                    : DarkThemeColors.stroke,
+              ),
               borderRadius: BorderRadius.all(Radius.circular(16)),
             ),
-            child: Image.asset(category.img, fit: BoxFit.cover),
+            child: Image.asset(
+              settingsConfig.currentTheme.isDark
+                  ? category.darkImg
+                  : category.lightImg,
+              fit: BoxFit.cover,
+            ),
           ),
           SizedBox(height: 16),
           Text(category.name, style: theme.textTheme.bodyLarge),
@@ -146,7 +163,15 @@ class EventDetails extends StatelessWidget {
           Container(
             padding: EdgeInsets.symmetric(vertical: 18, horizontal: 16),
             decoration: BoxDecoration(
-              border: Border.all(width: 2, color: LightThemeColors.stroke),
+              color: settingsConfig.currentTheme == ThemeMode.light
+                  ? LightThemeColors.inputs
+                  : DarkThemeColors.inputs,
+              border: Border.all(
+                width: 2,
+                color: settingsConfig.currentTheme == ThemeMode.light
+                    ? LightThemeColors.stroke
+                    : DarkThemeColors.stroke,
+              ),
               borderRadius: BorderRadius.all(Radius.circular(16)),
             ),
             child: Row(
@@ -155,9 +180,14 @@ class EventDetails extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
                   decoration: BoxDecoration(
+                    color: settingsConfig.currentTheme == ThemeMode.light
+                        ? LightThemeColors.inputs
+                        : DarkThemeColors.inputs,
                     border: Border.all(
                       width: 2,
-                      color: LightThemeColors.stroke,
+                      color: settingsConfig.currentTheme == ThemeMode.light
+                          ? LightThemeColors.stroke
+                          : DarkThemeColors.stroke,
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(16)),
                   ),
@@ -177,10 +207,21 @@ class EventDetails extends StatelessWidget {
               ],
             ),
           ),
+          SizedBox(height: 16),
           Text("Description", style: theme.textTheme.titleMedium),
+
+          SizedBox(height: 8),
           Container(
             decoration: BoxDecoration(
-              border: Border.all(width: 2, color: LightThemeColors.stroke),
+              color: settingsConfig.currentTheme == ThemeMode.light
+                  ? LightThemeColors.inputs
+                  : DarkThemeColors.inputs,
+              border: Border.all(
+                width: 2,
+                color: settingsConfig.currentTheme == ThemeMode.light
+                    ? LightThemeColors.stroke
+                    : DarkThemeColors.stroke,
+              ),
               borderRadius: BorderRadius.all(Radius.circular(16)),
             ),
             child: Text(

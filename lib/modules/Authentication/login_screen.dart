@@ -21,12 +21,12 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController loginController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   bool isPassword = true;
   @override
   Widget build(BuildContext context) {
-    TextEditingController loginController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
     ThemeData theme = Theme.of(context);
     final settingsConfig = Provider.of<SettingsConfig>(context);
     return Scaffold(
@@ -34,144 +34,83 @@ class _LoginScreenState extends State<LoginScreen> {
         title: Assets.images.eventlylogo.image(width: 140, height: 30),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 17),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            SizedBox(height: 48),
-            Text(
-              "Login to your account",
-              style: theme.textTheme.headlineSmall?.copyWith(
-                color: theme.primaryColor,
-              ),
-            ),
-            SizedBox(height: 24),
-            Form(
-              key: formKey,
-              child: Column(
-                children: [
-                  TextFieldButton(
-                    icon: Assets.icons.email.svg(),
-                    text: "Enter your email",
-                    controller: loginController,
-                    validator: (value) {
-                      if (value == null || value.trim().isEmpty) {
-                        return "Please enter your email";
-                      }
-
-                      final emailRegex = RegExp(r'^[\w\.-]+@[\w\.-]+\.\w+$');
-
-                      if (!emailRegex.hasMatch(value.trim())) {
-                        return "Please enter a valid email";
-                      }
-
-                      return null;
-                    },
-                  ),
-
-                  const SizedBox(height: 16),
-
-                  TextFieldButton(
-                    icon: Assets.icons.lock.svg(),
-                    text: "Enter your password",
-                    controller: passwordController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Please enter your password";
-                      }
-
-                      if (value.length < 6) {
-                        return "Password must be at least 6 characters";
-                      }
-
-                      return null;
-                    },
-                    suficon: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          isPassword = !isPassword;
-                        });
-                      },
-                      child: isPassword
-                          ? Assets.icons.eyeslash.svg(width: 24, height: 24)
-                          : const Icon(Icons.remove_red_eye),
-                    ),
-                    isPassword: isPassword,
-                  ),
-
-                  TextButton(
-                    onPressed: () {
-                      navigatorKey.currentState!.pushNamed(
-                        AppRoutesName.forgetPassword,
-                      );
-                    },
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        "Forget Password?",
-                        style: theme.textTheme.titleSmall?.copyWith(
-                          color: theme.primaryColor,
-                          decoration: TextDecoration.underline,
-                          decorationColor: theme.primaryColor,
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  const SizedBox(height: 58),
-
-                  Button(
-                    text: "Login",
-                    onPressed: () {
-                      if (formKey.currentState!.validate()) {
-                        LoadingOverlay.show(message: "Logging....", context);
-                        FireBaseServices().loginWithEmailAndPassword(
-                          loginController.text.trim(),
-                          passwordController.text.trim(),
-                        );
-                        navigatorKey.currentState!.pushAndRemoveUntil(
-                          MaterialPageRoute(
-                            builder: (context) => const HomeScreenView(),
-                          ),
-                          (route) => false,
-                        );
-                        LoadingOverlay.hide();
-                      }
-                    },
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 20,
-                      color: Colors.white,
-                      fontFamily: "Poppins",
-                    ),
-                  ),
-
-                  const SizedBox(height: 48),
-                ],
-              ),
-            ),
-            Text.rich(
-              textAlign: TextAlign.center,
-              TextSpan(
-                text: "Don't have an account? ",
-                style: theme.textTheme.titleSmall?.copyWith(
-                  color: settingsConfig.currentTheme == ThemeMode.light
-                      ? LightThemeColors.secondaryText
-                      : DarkThemeColors.secondaryText,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 17),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              SizedBox(height: 48),
+              Text(
+                "Login to your account",
+                style: theme.textTheme.headlineSmall?.copyWith(
+                  color: theme.primaryColor,
                 ),
-                children: [
-                  WidgetSpan(
-                    child: Bounce(
+              ),
+              SizedBox(height: 24),
+              Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    TextFieldButton(
+                      icon: Assets.icons.email.svg(),
+                      text: "Enter your email",
+                      controller: loginController,
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return "Please enter your email";
+                        }
+        
+                        final emailRegex = RegExp(r'^[\w\.-]+@[\w\.-]+\.\w+$');
+        
+                        if (!emailRegex.hasMatch(value.trim())) {
+                          return "Please enter a valid email";
+                        }
+        
+                        return null;
+                      },
+                    ),
+        
+                    const SizedBox(height: 16),
+        
+                    TextFieldButton(
+                      icon: Assets.icons.lock.svg(),
+                      text: "Enter your password",
+                      controller: passwordController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Please enter your password";
+                        }
+        
+                        if (value.length < 6) {
+                          return "Password must be at least 6 characters";
+                        }
+        
+                        return null;
+                      },
+                      suficon: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            isPassword = !isPassword;
+                          });
+                        },
+                        child: isPassword
+                            ? Assets.icons.eyeslash.svg(width: 24, height: 24)
+                            : const Icon(Icons.remove_red_eye),
+                      ),
+                      isPassword: isPassword,
+                    ),
+        
+                    TextButton(
                       onPressed: () {
-                        navigatorKey.currentState!.pushReplacementNamed(
-                          AppRoutesName.register,
+                        navigatorKey.currentState!.pushNamed(
+                          AppRoutesName.forgetPassword,
                         );
                       },
-                      duration: Duration(milliseconds: 210),
-                      child: Text.rich(
-                        TextSpan(
-                          text: "Sign up",
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Text(
+                          "Forget Password?",
                           style: theme.textTheme.titleSmall?.copyWith(
                             color: theme.primaryColor,
                             decoration: TextDecoration.underline,
@@ -180,85 +119,148 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-                  ),
-                ],
+        
+                    const SizedBox(height: 58),
+        
+                    Button(
+                      text: "Login",
+                      onPressed: () {
+                        if (formKey.currentState!.validate()) {
+                          LoadingOverlay.show(message: "Logging....", context);
+                          FireBaseServices().loginWithEmailAndPassword(
+                            loginController.text.trim(),
+                            passwordController.text.trim(),
+                          );
+                          navigatorKey.currentState!.pushAndRemoveUntil(
+                            MaterialPageRoute(
+                              builder: (context) => const HomeScreenView(),
+                            ),
+                            (route) => false,
+                          );
+                          LoadingOverlay.hide();
+                        }
+                      },
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontFamily: "Poppins",
+                      ),
+                    ),
+        
+                    const SizedBox(height: 48),
+                  ],
+                ),
               ),
-            ),
-            SizedBox(height: 32),
-            Row(
-              children: [
-                Expanded(
-                  child: Divider(
-                    indent: 16,
-                    endIndent: 16,
+              Text.rich(
+                textAlign: TextAlign.center,
+                TextSpan(
+                  text: "Don't have an account? ",
+                  style: theme.textTheme.titleSmall?.copyWith(
                     color: settingsConfig.currentTheme == ThemeMode.light
-                        ? LightThemeColors.stroke
-                        : DarkThemeColors.stroke,
+                        ? LightThemeColors.secondaryText
+                        : DarkThemeColors.secondaryText,
                   ),
-                ),
-                Text(
-                  "Or",
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    color: theme.primaryColor,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                Expanded(
-                  child: Divider(
-                    indent: 16,
-                    endIndent: 16,
-                    color: settingsConfig.currentTheme == ThemeMode.light
-                        ? LightThemeColors.stroke
-                        : DarkThemeColors.stroke,
-                  ),
-                ),
-              ],
-            ),
-
-            SizedBox(height: 24),
-            Bounce(
-              duration: Duration(milliseconds: 110),
-              onPressed: () async{
-                final result = await FireBaseServices().signInWithGoogle();
-
-                if (result != null) {
-                  navigatorKey.currentState!.pushReplacementNamed(
-                    AppRoutesName.home,
-                  );
-                }
-              },
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 10),
-                decoration: BoxDecoration(
-                  border: BoxBorder.all(
-                    color: settingsConfig.currentTheme == ThemeMode.light
-                        ? LightThemeColors.stroke
-                        : DarkThemeColors.stroke,
-                    width: 2,
-                  ),
-                  borderRadius: BorderRadius.circular(16),
-                  color: settingsConfig.currentTheme == ThemeMode.light
-                      ? LightThemeColors.inputs
-                      : DarkThemeColors.inputs,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  spacing: 16,
                   children: [
-                    Assets.icons.googlePng.image(width: 24, height: 24),
-                    Center(
-                      child: Text(
-                        "Login with Google",
-                        style: theme.textTheme.bodyLarge?.copyWith(
-                          color: theme.primaryColor,
+                    WidgetSpan(
+                      child: Bounce(
+                        onPressed: () {
+                          navigatorKey.currentState!.pushReplacementNamed(
+                            AppRoutesName.register,
+                          );
+                        },
+                        duration: Duration(milliseconds: 210),
+                        child: Text.rich(
+                          TextSpan(
+                            text: "Sign up",
+                            style: theme.textTheme.titleSmall?.copyWith(
+                              color: theme.primaryColor,
+                              decoration: TextDecoration.underline,
+                              decorationColor: theme.primaryColor,
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ],
                 ),
               ),
-            ),
-          ],
+              SizedBox(height: 32),
+              Row(
+                children: [
+                  Expanded(
+                    child: Divider(
+                      indent: 16,
+                      endIndent: 16,
+                      color: settingsConfig.currentTheme == ThemeMode.light
+                          ? LightThemeColors.stroke
+                          : DarkThemeColors.stroke,
+                    ),
+                  ),
+                  Text(
+                    "Or",
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      color: theme.primaryColor,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  Expanded(
+                    child: Divider(
+                      indent: 16,
+                      endIndent: 16,
+                      color: settingsConfig.currentTheme == ThemeMode.light
+                          ? LightThemeColors.stroke
+                          : DarkThemeColors.stroke,
+                    ),
+                  ),
+                ],
+              ),
+        
+              SizedBox(height: 24),
+              Bounce(
+                duration: Duration(milliseconds: 110),
+                onPressed: () async{
+                  final result = await FireBaseServices().signInWithGoogle();
+        
+                  if (result != null) {
+                    navigatorKey.currentState!.pushReplacementNamed(
+                      AppRoutesName.home,
+                    );
+                  }
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 10),
+                  decoration: BoxDecoration(
+                    border: BoxBorder.all(
+                      color: settingsConfig.currentTheme == ThemeMode.light
+                          ? LightThemeColors.stroke
+                          : DarkThemeColors.stroke,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(16),
+                    color: settingsConfig.currentTheme == ThemeMode.light
+                        ? LightThemeColors.inputs
+                        : DarkThemeColors.inputs,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    spacing: 16,
+                    children: [
+                      Assets.icons.googlePng.image(width: 24, height: 24),
+                      Center(
+                        child: Text(
+                          "Login with Google",
+                          style: theme.textTheme.bodyLarge?.copyWith(
+                            color: theme.primaryColor,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

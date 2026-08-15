@@ -41,7 +41,7 @@ class TabOfScreen extends StatelessWidget {
                 Text(
                   categoryData.name,
                   style: theme.textTheme.titleSmall?.copyWith(
-                    color: LightThemeColors.mainText,
+                    color:settingsConfig.currentTheme.isDark? DarkThemeColors.mainText:LightThemeColors.mainText,
                   ),
                 ),
               ],

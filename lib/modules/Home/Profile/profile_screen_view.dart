@@ -51,7 +51,9 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: settingConfig.currentTheme == ThemeMode.light
+                    ? LightThemeColors.background
+                    : DarkThemeColors.background,
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Container(
@@ -90,7 +92,9 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: settingConfig.currentTheme == ThemeMode.light
+                    ? LightThemeColors.background
+                    : DarkThemeColors.background,
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Container(
@@ -118,7 +122,9 @@ class _ProfileScreenViewState extends State<ProfileScreenView> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: settingConfig.currentTheme == ThemeMode.light
+                    ? LightThemeColors.background
+                    : DarkThemeColors.background,
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Container(

@@ -33,7 +33,6 @@ class OnBoardingScreen extends StatelessWidget {
         children: [
           image,
           SizedBox(height: 16),
-
           Align(
             alignment: AlignmentGeometry.center,
             child: SmoothPageIndicator(

@@ -78,7 +78,7 @@ class _EventEditState extends State<EventEdit> {
               ),
               child: Icon(
                 Icons.arrow_back_ios_new_outlined,
-
+            
                 color: settingsConfig.currentTheme == ThemeMode.light
                     ? LightThemeColors.mainColor
                     : DarkThemeColors.mainText,
@@ -87,144 +87,158 @@ class _EventEditState extends State<EventEdit> {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              border: Border.all(width: 2, color: LightThemeColors.stroke),
-              borderRadius: BorderRadius.all(Radius.circular(16)),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(width: 2, color: settingsConfig.currentTheme.isDark?DarkThemeColors.stroke:LightThemeColors.stroke),
+                borderRadius: BorderRadius.all(Radius.circular(16)),
+              ),
+              child: Image.asset(
+                settingsConfig.currentTheme.isDark
+                    ? category.darkImg
+                    : category.lightImg,
+                fit: BoxFit.cover,
+              ),
             ),
-            child: Image.asset(category.img, fit: BoxFit.cover),
-          ),
-          SizedBox(height: 16,),
-          Form(
-            key: formKey,
-            child: Column(
-              children: [
-                Column(
-                  spacing: 16,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Title",
-                      style: theme.textTheme.bodyLarge?.copyWith(
-                        color: LightThemeColors.mainText,
-                      ),
-                    ),
-                    TextFieldButton(
-                      text: "Enter Title",
-                      controller: titleController,
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return "Please enter event title";
-                        }
-
-                        if (value.trim().length < 3) {
-                          return "Title must be at least 3 characters";
-                        }
-
-                        return null;
-                      },
-                    ),
-
-                    SizedBox(height: 16,),],
-                ).paddingSymmetric(horizontal: 16),
-
-                Column(
-                  spacing: 16,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Description",
-                      style: theme.textTheme.bodyLarge?.copyWith(
-                        color: LightThemeColors.mainText,
-                      ),
-                    ),
-                    TextFieldButton(
-                      text: "Enter Description",
-                      maxlines: 5,
-                      controller: descriptionController,
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return "Please enter event description";
-                        }
-
-                        if (value.trim().length < 10) {
-                          return "Description must be at least 10 characters";
-                        }
-
-                        return null;
-                      },
-                    ),
-
-                    SizedBox(height: 16,), ],
-                ).paddingSymmetric(horizontal: 16),
-
-                Row(
-                  children: [
-                    Assets.icons.calendar.svg(),
-                    const SizedBox(width: 8),
-                    Text(
-                      "Event Date",
-                      style: theme.textTheme.bodyLarge?.copyWith(
-                        color: LightThemeColors.mainText,
-                      ),
-                    ),
-                     Spacer(),
-                    TextButton(
-                      onPressed: _showDataPicker,
-                      child: Text(
-                        formatDate(
-                          selectedDateTime ?? category.selectedDateTime!,
-                          [M, ' ', dd, ',', yyyy],
-                        ),
-                        style: theme.textTheme.titleMedium?.copyWith(
-                          color: theme.primaryColor,
+            SizedBox(height: 16,),
+            Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  Column(
+                    spacing: 16,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Title",
+                        style: theme.textTheme.bodyLarge?.copyWith(
+                          color: settingsConfig.currentTheme.isDark
+                              ? DarkThemeColors.mainText
+                              : LightThemeColors.mainText,
                         ),
                       ),
-                    ),
-                  ],
-                ).paddingSymmetric(horizontal: 16),
-
-                Row(
-                  children: [
-                    Assets.icons.clock.svg(),
-                    const SizedBox(width: 8),
-                    Text(
-                      "Event Time",
-                      style: theme.textTheme.bodyLarge?.copyWith(
-                        color: LightThemeColors.mainText,
+                      TextFieldButton(
+                        text: "Enter Title",
+                        controller: titleController,
+                        validator: (value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return "Please enter event title";
+                          }
+        
+                          if (value.trim().length < 3) {
+                            return "Title must be at least 3 characters";
+                          }
+                          return null;
+                        },
                       ),
-                    ),
-                    const Spacer(),
-                    TextButton(
-                      onPressed: _showTimePicker,
-                      child: Text(
-                        (selectedTime ?? category.selectedTime!).format(context),
-                        style: theme.textTheme.titleSmall?.copyWith(
-                          color: theme.primaryColor,
-                          decoration: TextDecoration.underline,
+        
+                      SizedBox(height: 16,),],
+                  ).paddingSymmetric(horizontal: 16),
+        
+                  Column(
+                    spacing: 16,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Description",
+                        style: theme.textTheme.bodyLarge?.copyWith(
+                          color: settingsConfig.currentTheme.isDark
+                              ? DarkThemeColors.mainText
+                              : LightThemeColors.mainText,
                         ),
                       ),
+                      TextFieldButton(
+                        text: "Enter Description",
+                        maxlines: 5,
+                        controller: descriptionController,
+                        validator: (value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return "Please enter event description";
+                          }
+        
+                          if (value.trim().length < 10) {
+                            return "Description must be at least 10 characters";
+                          }
+        
+                          return null;
+                        },
+                      ),
+        
+                      SizedBox(height: 16,), ],
+                  ).paddingSymmetric(horizontal: 16),
+        
+                  Row(
+                    children: [
+                      Assets.icons.calendar.svg(),
+                      const SizedBox(width: 8),
+                      Text(
+                        "Event Date",
+                        style: theme.textTheme.bodyLarge?.copyWith(
+                          color: settingsConfig.currentTheme.isDark
+                              ? DarkThemeColors.mainText
+                              : LightThemeColors.mainText,
+                        ),
+                      ),
+                       Spacer(),
+                      TextButton(
+                        onPressed: _showDataPicker,
+                        child: Text(
+                          formatDate(
+                            selectedDateTime ?? category.selectedDateTime!,
+                            [M, ' ', dd, ',', yyyy],
+                          ),
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            color: theme.primaryColor,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ).paddingSymmetric(horizontal: 16),
+        
+                  Row(
+                    children: [
+                      Assets.icons.clock.svg(),
+                      const SizedBox(width: 8),
+                      Text(
+                        "Event Time",
+                        style: theme.textTheme.bodyLarge?.copyWith(
+                          color: settingsConfig.currentTheme.isDark
+                              ? DarkThemeColors.mainText
+                              : LightThemeColors.mainText,
+                        ),
+                      ),
+                      const Spacer(),
+                      TextButton(
+                        onPressed: _showTimePicker,
+                        child: Text(
+                          (selectedTime ?? category.selectedTime!).format(context),
+                          style: theme.textTheme.titleSmall?.copyWith(
+                            color: theme.primaryColor,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ).paddingSymmetric(horizontal: 16),
+        
+                  Button(
+                    text: "Update event",
+                    onPressed:() => editEvent(),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: "Poppins",
                     ),
-                  ],
-                ).paddingSymmetric(horizontal: 16),
-
-                Button(
-                  text: "Update event",
-                  onPressed:() => editEvent(),
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                    fontFamily: "Poppins",
-                  ),
-                ).paddingSymmetric(horizontal: 16),
-              ],
+                  ).paddingSymmetric(horizontal: 16),
+                ],
+              ),
             ),
-          ),
-        ],
-      ).paddingSymmetric(horizontal: 16, vertical: 16),
+          ],
+        ).paddingSymmetric(horizontal: 16, vertical: 16),
+      ),
     );
 
   }

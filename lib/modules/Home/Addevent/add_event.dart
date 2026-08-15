@@ -42,7 +42,9 @@ class _AddEventState extends State<AddEvent> {
         title: Text(
           "Add event",
           style: theme.textTheme.bodyLarge?.copyWith(
-            color: LightThemeColors.mainText,
+            color: settingsConfig.currentTheme == ThemeMode.light
+                ? LightThemeColors.mainText
+                : DarkThemeColors.mainText,
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -84,13 +86,17 @@ class _AddEventState extends State<AddEvent> {
           spacing: 16,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Image.asset(CategoryDataList.categories[index].img),
+            Image.asset(
+              settingsConfig.currentTheme.isDark
+                  ? CategoryDataList.categories[index].darkImg
+                  : CategoryDataList.categories[index].lightImg,
+            ),
             DefaultTabController(
               length: CategoryDataList.categories.length,
               child: TabBar(
                 onTap: (value) {
                   setState(() {
-                    index = value+1;
+                    index = value + 1;
                   });
                 },
                 labelPadding: EdgeInsets.symmetric(horizontal: 8),
@@ -99,153 +105,168 @@ class _AddEventState extends State<AddEvent> {
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 tabAlignment: TabAlignment.start,
                 indicator: BoxDecoration(),
-                tabs: List.generate(CategoryDataList.categories.length-1, (currentIndex) {
-                  final category = CategoryDataList.categories[currentIndex+1];
+                tabs: List.generate(CategoryDataList.categories.length - 1, (
+                  currentIndex,
+                ) {
+                  final category =
+                      CategoryDataList.categories[currentIndex + 1];
                   return TabOfScreen(
-                      categoryData: category,
-                      isSelected: index == currentIndex+1,
+                    categoryData: category,
+                    isSelected: index == currentIndex + 1,
                   );
-                  },
+                }),
               ),
             ),
+            Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  Column(
+                    spacing: 8,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Title",
+                        style: theme.textTheme.bodyLarge?.copyWith(
+                          color:  settingsConfig.currentTheme == ThemeMode.light
+                              ? LightThemeColors.mainText
+                              : DarkThemeColors.mainText,
+                        ),
+                      ),
+                      TextFieldButton(
+                        text: "Enter Title",
+                        controller: titleController,
+                        validator: (value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return "Please enter event title";
+                          }
+
+                          if (value.trim().length < 3) {
+                            return "Title must be at least 3 characters";
+                          }
+
+                          return null;
+                        },
+                      ),
+                    ],
+                  ).paddingSymmetric(horizontal: 16),
+
+                  Column(
+                    spacing: 8,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Description",
+                        style: theme.textTheme.bodyLarge?.copyWith(
+                          color:  settingsConfig.currentTheme == ThemeMode.light
+                              ? LightThemeColors.mainText
+                              : DarkThemeColors.mainText,
+                        ),
+                      ),
+                      TextFieldButton(
+                        text: "Enter Description",
+                        maxlines: 5,
+                        controller: descriptionController,
+                        validator: (value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return "Please enter event description";
+                          }
+
+                          if (value.trim().length < 10) {
+                            return "Description must be at least 10 characters";
+                          }
+
+                          return null;
+                        },
+                      ),
+                    ],
+                  ).paddingSymmetric(horizontal: 16),
+
+                  Row(
+                    children: [
+                      Assets.icons.calendar.svg(),
+                      const SizedBox(width: 8),
+                      Text(
+                        "Event Date",
+                        style: theme.textTheme.bodyLarge?.copyWith(
+                          color:  settingsConfig.currentTheme == ThemeMode.light
+                              ? LightThemeColors.mainText
+                              : DarkThemeColors.mainText,
+                        ),
+                      ),
+                      const Spacer(),
+                      TextButton(
+                        onPressed: _showDataPicker,
+                        child: Text(
+                          selectedDataTime == null
+                              ? "Choose date"
+                              : formatDate(selectedDataTime!, [
+                                  M,
+                                  ' ',
+                                  dd,
+                                  ',',
+                                  yyyy,
+                                ]),
+                          style: theme.textTheme.titleSmall?.copyWith(
+                            color: selectedDataTime == null
+                                ? Colors.red
+                                : theme.primaryColor,
+                            decoration: TextDecoration.underline,
+                            decorationColor: selectedDataTime == null
+                                ? Colors.red
+                                : theme.primaryColor,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ).paddingSymmetric(horizontal: 16),
+
+                  Row(
+                    children: [
+                      Assets.icons.clock.svg(),
+                      const SizedBox(width: 8),
+                      Text(
+                        "Event Time",
+                        style: theme.textTheme.bodyLarge?.copyWith(
+                          color:  settingsConfig.currentTheme == ThemeMode.light
+                              ? LightThemeColors.mainText
+                              : DarkThemeColors.mainText,
+                        ),
+                      ),
+                      const Spacer(),
+                      TextButton(
+                        onPressed: _showTimePicker,
+                        child: Text(
+                          selectedTime == null
+                              ? "Choose time"
+                              : selectedTime!.format(context),
+                          style: theme.textTheme.titleSmall?.copyWith(
+                            color: selectedTime == null
+                                ? Colors.red
+                                : theme.primaryColor,
+                            decoration: TextDecoration.underline,
+                            decorationColor: selectedTime == null
+                                ? Colors.red
+                                : theme.primaryColor,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ).paddingSymmetric(horizontal: 16),
+
+                  Button(
+                    text: "Add event",
+                    onPressed: addEvent,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: "Poppins",
+                    ),
+                  ).paddingSymmetric(horizontal: 16),
+                ],
+              ),
             ),
-        Form(
-          key: formKey,
-          child: Column(
-            children: [
-              Column(
-                spacing: 8,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Title",
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                      color: LightThemeColors.mainText,
-                    ),
-                  ),
-                  TextFieldButton(
-                    text: "Enter Title",
-                    controller: titleController,
-                    validator: (value) {
-                      if (value == null || value.trim().isEmpty) {
-                        return "Please enter event title";
-                      }
-
-                      if (value.trim().length < 3) {
-                        return "Title must be at least 3 characters";
-                      }
-
-                      return null;
-                    },
-                  ),
-                ],
-              ).paddingSymmetric(horizontal: 16),
-
-              Column(
-                spacing: 8,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Description",
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                      color: LightThemeColors.mainText,
-                    ),
-                  ),
-                  TextFieldButton(
-                    text: "Enter Description",
-                    maxlines: 5,
-                    controller: descriptionController,
-                    validator: (value) {
-                      if (value == null || value.trim().isEmpty) {
-                        return "Please enter event description";
-                      }
-
-                      if (value.trim().length < 10) {
-                        return "Description must be at least 10 characters";
-                      }
-
-                      return null;
-                    },
-                  ),
-                ],
-              ).paddingSymmetric(horizontal: 16),
-
-              Row(
-                children: [
-                  Assets.icons.calendar.svg(),
-                  const SizedBox(width: 8),
-                  Text(
-                    "Event Date",
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                      color: LightThemeColors.mainText,
-                    ),
-                  ),
-                  const Spacer(),
-                  TextButton(
-                    onPressed: _showDataPicker,
-                    child: Text(
-                      selectedDataTime == null
-                          ? "Choose date"
-                          : formatDate(
-                        selectedDataTime!,
-                        [M, ' ', dd, ',', yyyy],
-                      ),
-                      style: theme.textTheme.titleSmall?.copyWith(
-                        color: selectedDataTime == null
-                            ? Colors.red
-                            : theme.primaryColor,
-                        decoration: TextDecoration.underline,
-                        decorationColor: selectedDataTime == null
-                            ? Colors.red
-                            : theme.primaryColor,
-                      ),
-                    ),
-                  ),
-                ],
-              ).paddingSymmetric(horizontal: 16),
-
-              Row(
-                children: [
-                  Assets.icons.clock.svg(),
-                  const SizedBox(width: 8),
-                  Text(
-                    "Event Time",
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                      color: LightThemeColors.mainText,
-                    ),
-                  ),
-                  const Spacer(),
-                  TextButton(
-                    onPressed: _showTimePicker,
-                    child: Text(
-                      selectedTime == null
-                          ? "Choose time"
-                          : selectedTime!.format(context),
-                      style: theme.textTheme.titleSmall?.copyWith(
-                        color:
-                        selectedTime == null ? Colors.red : theme.primaryColor,
-                        decoration: TextDecoration.underline,
-                        decorationColor:
-                        selectedTime == null ? Colors.red : theme.primaryColor,
-                      ),
-                    ),
-                  ),
-                ],
-              ).paddingSymmetric(horizontal: 16),
-
-              Button(
-                text: "Add event",
-                onPressed: addEvent,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                  fontFamily: "Poppins",
-                ),
-              ).paddingSymmetric(horizontal: 16),
-            ],
-          ),
-        ),
           ],
         ),
       ),
@@ -268,8 +289,8 @@ class _AddEventState extends State<AddEvent> {
     );
     setState(() {});
   }
-  Future<void> addEvent() async {
 
+  Future<void> addEvent() async {
     final isFormValid = formKey.currentState?.validate() ?? false;
 
     if (!isFormValid) {
@@ -278,26 +299,26 @@ class _AddEventState extends State<AddEvent> {
 
     if (selectedDataTime == null) {
       Fluttertoast.showToast(
-          msg: "Please Enter valid date",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0
+        msg: "Please Enter valid date",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
       );
       return;
     }
 
     if (selectedTime == null) {
       Fluttertoast.showToast(
-          msg: "Please choose event time",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0
+        msg: "Please choose event time",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
       );
       return;
     }
@@ -311,20 +332,21 @@ class _AddEventState extends State<AddEvent> {
       description: descriptionController.text.trim(),
       selectedDateTime: selectedDataTime,
       selectedTime: selectedTime,
-      img: selectedCategory.img,
+      lightImg: selectedCategory.lightImg,
+      darkImg: selectedCategory.darkImg,
       icn: selectedCategory.icn,
     );
 
     try {
       await FireBaseServices().createNewEvent(category);
       Fluttertoast.showToast(
-          msg: "Added Successfully",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.TOP,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.green,
-          textColor: Colors.white,
-          fontSize: 16.0
+        msg: "Added Successfully",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.TOP,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0,
       );
       if (!mounted) return;
 
@@ -332,11 +354,9 @@ class _AddEventState extends State<AddEvent> {
     } catch (error) {
       if (!mounted) return;
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Failed to add event: $error"),
-        ),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Failed to add event: $error")));
     }
   }
 }

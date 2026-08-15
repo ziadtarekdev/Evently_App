@@ -200,6 +200,26 @@ class $AssetsImagesGen {
   AssetGenImage get bookClub =>
       const AssetGenImage('assets/images/book_club.png');
 
+  /// File path: assets/images/darkbirthday.png
+  AssetGenImage get darkbirthday =>
+      const AssetGenImage('assets/images/darkbirthday.png');
+
+  /// File path: assets/images/darkbookclub.png
+  AssetGenImage get darkbookclub =>
+      const AssetGenImage('assets/images/darkbookclub.png');
+
+  /// File path: assets/images/darkexhibition.png
+  AssetGenImage get darkexhibition =>
+      const AssetGenImage('assets/images/darkexhibition.png');
+
+  /// File path: assets/images/darkmeeting.png
+  AssetGenImage get darkmeeting =>
+      const AssetGenImage('assets/images/darkmeeting.png');
+
+  /// File path: assets/images/darksport.png
+  AssetGenImage get darksport =>
+      const AssetGenImage('assets/images/darksport.png');
+
   /// File path: assets/images/exhibition.png
   AssetGenImage get exhibition =>
       const AssetGenImage('assets/images/exhibition.png');
@@ -240,6 +260,11 @@ class $AssetsImagesGen {
     birthday,
     birthdayimg,
     bookClub,
+    darkbirthday,
+    darkbookclub,
+    darkexhibition,
+    darkmeeting,
+    darksport,
     exhibition,
     forgetpassscreen,
     imgfirstonboarding,

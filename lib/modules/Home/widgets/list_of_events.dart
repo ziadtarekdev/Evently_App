@@ -60,7 +60,7 @@ class _ListOfEventsState extends State<ListOfEvents> {
               return const SizedBox(height: 16);
             },
             itemBuilder: (context, index) {
-              return eventCard(theme, events[index]);
+              return EventCard(theme: theme, event: events[index],);
             },
           );
         },
@@ -100,7 +100,7 @@ class _ListOfEventsState extends State<ListOfEvents> {
               return const SizedBox(height: 16);
             },
             itemBuilder: (context, index) {
-              return eventCard(theme, events[index]);
+              return EventCard(theme: theme, event: events[index],);
             },
           );
         },

@@ -17,7 +17,7 @@ class MainScreenView extends StatefulWidget {
 }
 
 class _MainScreenViewState extends State<MainScreenView> {
-  int index=0;
+  int index = 0;
   @override
   Widget build(BuildContext context) {
     final settingsConfig = Provider.of<SettingsConfig>(context);
@@ -36,10 +36,18 @@ class _MainScreenViewState extends State<MainScreenView> {
                   ),
                 ).paddingSymmetric(vertical: 16, horizontal: 16),
                 Spacer(),
-                settingsConfig.currentTheme == ThemeMode.light
-                    ? Assets.icons.sunmainpage.svg()
-                    : Assets.icons.moonhomepage.svg(),
-
+                GestureDetector(
+                  onTap: () {
+                    settingsConfig.changeTheme(
+                      settingsConfig.currentTheme.isLight
+                          ? ThemeMode.dark
+                          : ThemeMode.light,
+                    );
+                  },
+                  child: settingsConfig.currentTheme == ThemeMode.light
+                      ? Assets.icons.sunmainpage.svg()
+                      : Assets.icons.moonhomepage.svg(),
+                ),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5.5),
                   decoration: BoxDecoration(
@@ -74,18 +82,19 @@ class _MainScreenViewState extends State<MainScreenView> {
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 tabAlignment: TabAlignment.start,
                 indicator: BoxDecoration(),
-                tabs: List.generate(CategoryDataList.categories.length, (currentIndex) {
+                tabs: List.generate(CategoryDataList.categories.length, (
+                  currentIndex,
+                ) {
                   final category = CategoryDataList.categories[currentIndex];
                   return TabOfScreen(
                     categoryData: category,
                     isSelected: index == currentIndex,
                   );
-                },
-                ),
+                }),
               ),
             ),
             SizedBox(height: 24),
-            ListOfEvents(selectedIndex: index,),
+            ListOfEvents(selectedIndex: index),
           ],
         ),
       ),

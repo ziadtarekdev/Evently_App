@@ -5,22 +5,24 @@ class CategoryData {
   String eventID;
   String name;
   String description;
-  String img;
+  String lightImg;
   String icn;
   DateTime? selectedDateTime;
   TimeOfDay? selectedTime;
   bool isFavourite;
+  String darkImg;
 
   CategoryData({
     required this.categoryID,
     required this.eventID,
     required this.name,
     this.description="",
-    this.img = "",
+    this.lightImg = "",
     this.icn = "",
     this.selectedTime,
     this.selectedDateTime,
     this.isFavourite = false,
+    this.darkImg="",
   });
 
   Map<String, dynamic> toFirestore() {
@@ -29,7 +31,8 @@ class CategoryData {
       "eventID":eventID,
       "categoryName": name,
       "categoryDescription": description,
-      "categoryImage": img,
+      "lightCategoryImage": lightImg,
+      "darkCategoryImage":darkImg,
       "categoryIcon": icn,
       "isFavourite": isFavourite,
       "categoryDate": selectedDateTime?.millisecondsSinceEpoch,
@@ -48,7 +51,8 @@ class CategoryData {
       eventID: json["eventID"] as String? ?? "",
       name: json["categoryName"] as String? ?? "",
       description: json["categoryDescription"] as String? ?? "",
-      img: json["categoryImage"] as String? ?? "",
+      lightImg: json["lightCategoryImage"] as String? ?? "",
+      darkImg: json["darkCategoryImage"] as String? ?? "",
       icn: json["categoryIcon"] as String? ?? "",
       isFavourite: json["isFavourite"] as bool? ?? false,
       selectedDateTime: dateEpoch == null

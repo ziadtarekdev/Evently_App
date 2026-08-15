@@ -68,7 +68,7 @@ class _FavouriteScreenViewState extends State<FavouriteScreenView> {
                       return const SizedBox(height: 16);
                     },
                     itemBuilder: (context, index) {
-                      return  eventCard(theme, events[index]);
+                      return EventCard(theme: theme, event: events[index],);
                     },
                   );
                 },
